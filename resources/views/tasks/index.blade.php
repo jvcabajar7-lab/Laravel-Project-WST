@@ -1,114 +1,327 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Task Manager</title>
-    <!-- Simple Vanilla CSS styling -->
+
+    <title>Task Management System</title>
+
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f6f9; margin: 0; padding: 20px; }
-        .container { max-width: 900px; margin: 0 auto; background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        h1 { margin-top: 0; color: #333; }
-        .alert { background: #d4edda; color: #155724; padding: 10px; border-radius: 4px; margin-bottom: 20px; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; }
-        input[type="text"], textarea, input[type="date"] { width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
-        button { background: #007bff; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; }
-        button:hover { background: #0056b3; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
-        th { background-color: #f8f9fa; }
-        .badge { padding: 4px 8px; border-radius: 4px; font-size: 12px; color: white; }
-        .badge-pending { background: #ffc107; color: #000; }
-        .badge-completed { background: #28a745; }
-        .actions { display: flex; gap: 5px; }
-        .btn-status { background: #17a2b8; }
-        .btn-delete { background: #dc3545; }
+
+        body {
+            font-family: Arial;
+            background-color: lightgray;
+             background: #f4f6f8;
+             color: #1f2937;
+              min-height: 100vh;
+        }
+
+        .container {
+            width: 550px;
+            margin: 30px auto;
+            background-color: white;
+            padding: 20px;
+            border: 1px solid black;
+            color: black;
+            
+        }
+
+        h1 {
+            font-size: 30px;
+             margin-bottom: 8px;
+        }
+
+        input, textarea {
+            width: 95%;
+            padding: 10px;
+            margin-bottom: 10px;
+            color: grey;
+        }
+
+        textarea {
+            height: 70px;
+        }
+
+        button {
+            padding: 8px 12px;
+            margin: 3px;
+            cursor: pointer;
+            color: black;
+        }
+
+        .task {
+            border: 1px solid black;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        .pending {
+            background-color: lightyellow;
+        }
+
+        .completed {
+            background-color: lightgreen;
+        }
+
+        .task p {
+            margin: 5px 0;
+        }
+
     </style>
+
 </head>
+
+
 <body>
 
-<div class="container">
-    <h1>Personal Task Manager</h1>
+    <div class="container">
 
-    <!-- Success Flash Message -->
-    @if(session('success'))
-        <div class="alert">{{ session('success') }}</div>
-    @endif
+        <h1>Task Management System</h1>
 
-    <!-- Add Task Form -->
-    <form action="{{ route('tasks.store') }}" method="POST">
-        @csrf
-        <div class="form-group">
-            <label for="task_name">Task Name *</label>
-            <input type="text" id="task_name" name="task_name" required placeholder="e.g., Complete WST Assignment">
-        </div>
 
-        <div class="form-group">
-            <label for="description">Description</label>
-            <textarea id="description" name="description" rows="2" placeholder="Task details..."></textarea>
-        </div>
+        <h3>Add Task</h3>
 
-        <div class="form-group">
-            <label for="due_date">Due Date</label>
-            <input type="date" id="due_date" name="due_date">
-        </div>
+        
+        <input
+            type="text"
+            id="taskName"
+            placeholder="Enter task name"
+        >
 
-        <button type="submit">Add Task</button>
-    </form>
 
-    <hr style="margin: 30px 0;">
+        
+        <textarea
+            id="taskDescription"
+            placeholder="Enter task description"
+        ></textarea>
 
-    <h2>Task List</h2>
 
-    <!-- Tasks Table -->
-    <table>
-        <thead>
-            <tr>
-                <th>Task</th>
-                <th>Description</th>
-                <th>Status</th>
-                <th>Due Date</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse($tasks as $task)
-                <tr>
-                    <td><strong>{{ $task->task_name }}</strong></td>
-                    <td>{{ $task->description ?? 'N/A' }}</td>
-                    <td>
-                        <span class="badge {{ $task->status === 'Completed' ? 'badge-completed' : 'badge-pending' }}">
-                            {{ $task->status }}
-                        </span>
-                    </td>
-                    <td>{{ $task->due_date ? date('M d, Y', strtotime($task->due_date)) : 'No deadline' }}</td>
-                    <td class="actions">
-                        <!-- Update Status Button -->
-                        <form action="{{ route('tasks.toggleStatus', $task->id) }}" method="POST">
-                            @csrf
-                            @method('PATCH')
-                            <button type="submit" class="btn-status">
-                                {{ $task->status === 'Pending' ? 'Mark Done' : 'Mark Pending' }}
-                            </button>
-                        </form>
+        
+        <input
+            type="date"
+            id="taskDate"
+        >
 
-                        <!-- Delete Task Button -->
-                        <form action="{{ route('tasks.destroy', $task->id) }}" method="POST" onsubmit="return confirm('Delete this task?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn-delete">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="5" style="text-align: center;">No tasks found. Add one above!</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
-</div>
+
+        <button onclick="addTask()">
+            Add Task
+        </button>
+
+
+        <h3>My Tasks</h3>
+
+        <div id="taskList"></div>
+
+    </div>
+
+
+    <script>
+
+        
+        var tasks = [];
+
+
+        
+        function addTask() {
+
+            var name =
+                document.getElementById("taskName").value;
+
+            var description =
+                document.getElementById("taskDescription").value;
+
+            var date =
+                document.getElementById("taskDate").value;
+
+
+            if (name == "") {
+
+                alert("Please enter a task name.");
+
+                return;
+
+            }
+
+
+            
+            tasks.push({
+
+                name: name,
+
+                description: description,
+
+                date: date,
+
+                status: "Pending"
+
+            });
+
+
+            
+            document.getElementById("taskName").value = "";
+
+            document.getElementById("taskDescription").value = "";
+
+            document.getElementById("taskDate").value = "";
+
+
+           
+            showTasks();
+
+        }
+
+
+       
+        function showTasks() {
+
+            var list =
+                document.getElementById("taskList");
+
+
+            
+            list.innerHTML = "";
+
+
+           
+            for (var i = 0; i < tasks.length; i++) {
+
+                var task = tasks[i];
+
+
+                var box =
+                    document.createElement("div");
+
+
+                
+                if (task.status == "Completed") {
+
+                    box.className = "task completed";
+
+                } else {
+
+                    box.className = "task pending";
+
+                }
+
+
+                box.innerHTML =
+
+                    "<b>Task:</b> " +
+                    task.name +
+
+                    "<p><b>Description:</b> " +
+                    task.description +
+                    "</p>" +
+
+                    "<p><b>Due Date:</b> " +
+                    task.date +
+                    "</p>" +
+
+                    "<p><b>Status:</b> " +
+                    task.status +
+                    "</p>" +
+
+                    "<button onclick='editTask(" +
+                    i +
+                    ")'>Edit</button>" +
+
+                    "<button onclick='deleteTask(" +
+                    i +
+                    ")'>Delete</button>" +
+
+                    "<button onclick='changeStatus(" +
+                    i +
+                    ")'>Change Status</button>";
+
+
+                list.appendChild(box);
+
+            }
+
+        }
+
+
+        
+        function editTask(index) {
+
+            var newName =
+                prompt(
+                    "Enter new task name:",
+                    tasks[index].name
+                );
+
+
+            if (newName == null || newName == "") {
+
+                return;
+
+            }
+
+
+            var newDescription =
+                prompt(
+                    "Enter new description:",
+                    tasks[index].description
+                );
+
+
+            var newDate =
+                prompt(
+                    "Enter new date:",
+                    tasks[index].date
+                );
+
+
+           
+            tasks[index].name = newName;
+
+            tasks[index].description = newDescription;
+
+            tasks[index].date = newDate;
+
+
+            
+            showTasks();
+
+        }
+
+
+        function deleteTask(index) {
+
+            var answer =
+                confirm("Do you want to delete this task?");
+
+
+            if (answer == true) {
+
+                tasks.splice(index, 1);
+
+                showTasks();
+
+            }
+
+        }
+
+
+        
+        function changeStatus(index) {
+
+            if (tasks[index].status == "Pending") {
+
+                tasks[index].status = "Completed";
+
+            } else {
+
+                tasks[index].status = "Pending";
+
+            }
+
+
+            showTasks();
+
+        }
+
+    </script>
 
 </body>
+
 </html>

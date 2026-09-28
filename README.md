@@ -84,3 +84,8 @@ Database Used: SQLite
 4. Set `DB_CONNECTION=sqlite` in `.env`.
 5. Run migrations: `php artisan migrate`
 6. Start development server: `php artisan serve`
+
+## System Output Screenshots
+
+### Task Manager Output
+![Task List Screenshot](screenshots/task-list.png)
