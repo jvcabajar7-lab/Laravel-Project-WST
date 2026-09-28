@@ -89,3 +89,26 @@ Database Used: SQLite
 
 ### Task Manager Output
 <img width="1917" height="1140" alt="task-list png" src="https://github.com/user-attachments/assets/e6f10b8b-d101-407f-964a-e07d9325f6d4" />
+
+### Step 1: Viewing the Task List
+Below is the main page where all current tasks are listed:
+<img width="1872" height="1142" alt="view-task" src="https://github.com/user-attachments/assets/3ec008e3-1624-4635-915d-65709b4054aa" />
+
+
+
+### Step 2: Adding a New Task
+This shows the form filled out to create a new task:
+<img width="1892" height="1132" alt="addnew-task" src="https://github.com/user-attachments/assets/2c6a2802-61c2-40e9-8b31-234ba25e6758" />
+
+
+
+### Step 3: Updating / Toggling Task Status
+Here is the output after marking a task as completed or updating it:
+<img width="1891" height="1140" alt="updating-task" src="https://github.com/user-attachments/assets/b2ae0c27-2925-4b45-9121-e48f51eaa1ee" />
+
+
+
+### Step 4: Deleting a Task
+This displays the screen after deleting a task from the system:
+<img width="1892" height="1142" alt="delete-task" src="https://github.com/user-attachments/assets/ad73b074-6c61-4b1e-82ca-791d7843337b" />
+
