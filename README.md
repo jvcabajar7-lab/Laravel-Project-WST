@@ -88,4 +88,4 @@ Database Used: SQLite
 ## System Output Screenshots
 
 ### Task Manager Output
-![Task List Screenshot](screenshots/task-list.png)
+<img width="1917" height="1140" alt="task-list png" src="https://github.com/user-attachments/assets/e6f10b8b-d101-407f-964a-e07d9325f6d4" />
