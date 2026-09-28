@@ -98,17 +98,17 @@ Below is the main page where all current tasks are listed:
 
 ### Step 2: Adding a New Task
 This shows the form filled out to create a new task:
-<img width="1892" height="1132" alt="addnew-task" src="https://github.com/user-attachments/assets/2c6a2802-61c2-40e9-8b31-234ba25e6758" />
+<img width="1897" height="1126" alt="addnew-task" src="https://github.com/user-attachments/assets/23cdf96b-1bc0-4a33-a888-35a8e769db3e" />
 
 
 
 ### Step 3: Updating / Toggling Task Status
 Here is the output after marking a task as completed or updating it:
-<img width="1891" height="1140" alt="updating-task" src="https://github.com/user-attachments/assets/b2ae0c27-2925-4b45-9121-e48f51eaa1ee" />
+<img width="1896" height="1145" alt="updating-task" src="https://github.com/user-attachments/assets/a0b4ac5b-8637-4093-bef6-4fa57822c434" />
 
 
 
 ### Step 4: Deleting a Task
 This displays the screen after deleting a task from the system:
-<img width="1892" height="1142" alt="delete-task" src="https://github.com/user-attachments/assets/ad73b074-6c61-4b1e-82ca-791d7843337b" />
+<img width="1896" height="1131" alt="delete-task" src="https://github.com/user-attachments/assets/d749496f-d0bd-41ee-9293-3c64b3ee8139" />
 
